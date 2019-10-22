@@ -1,0 +1,10 @@
+{
+  "domain": "xfinity",
+  "name": "Xfinity Usage",
+  "documentation": "https://github.com/robert-alfaro/xfinity-usage",
+  "requirements": [],
+  "dependencies": [],
+  "codeowners": [
+    "@ralfaro"
+  ]
+}
