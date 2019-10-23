@@ -16,7 +16,7 @@ type: entities
 entities:
   - entity: sensor.xfinity_usage
 ```
-![entities-card](images/entities-card.png)
+![entities-card](https://github.com/robert-alfaro/xfinity-usage/raw/master/images/entities-card.png)
 
 
 ```yaml
@@ -26,4 +26,4 @@ entities:
 hours_to_show: 24
 refresh_interval: 3600
 ```
-![history_graph-card](images/history_graph-card.png)
+![history_graph-card](https://github.com/robert-alfaro/xfinity-usage/raw/master/images/history_graph-card.png)
