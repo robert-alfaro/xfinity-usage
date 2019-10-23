@@ -22,6 +22,7 @@ ATTR_ALLOWED_USAGE = 'allowed_usage'
 ATTR_REMAINING_USAGE = 'remaining_usage'
 
 DEFAULT_NAME = "Xfinity Usage"
+DEFAULT_ICON = 'mdi:network'
 
 SCAN_INTERVAL = timedelta(hours=1)
 
@@ -55,6 +56,7 @@ class XfinityUsageSensor(Entity):
     def __init__(self, name, xfinity_data):
         """Initialize the sensor."""
         self._name = name
+        self._icon = DEFAULT_ICON
         self._xfinity_data = xfinity_data
         self._state = None
 
@@ -62,6 +64,11 @@ class XfinityUsageSensor(Entity):
     def name(self):
         """Return the name of the sensor."""
         return self._name
+
+    @property
+    def icon(self):
+        """Return the icon of the sensor."""
+        return self._icon
 
     @property
     def state(self):
