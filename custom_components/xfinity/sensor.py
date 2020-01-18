@@ -154,8 +154,12 @@ class XfinityUsageData:
         self.data = json.loads(res.text)
         _LOGGER.debug(f"Received usage data: {self.data}")
 
-        self.unit = self.data['usageMonths'][-1]['unitOfMeasure']
-        self.total_usage = self.data['usageMonths'][-1]['homeUsage']
-        self.allowed_usage = self.data['usageMonths'][-1]['allowableUsage']
-        self.remaining_usage = self.allowed_usage - self.total_usage
+        try:
+            self.unit = self.data['usageMonths'][-1]['unitOfMeasure']
+            self.total_usage = self.data['usageMonths'][-1]['homeUsage']
+            self.allowed_usage = self.data['usageMonths'][-1]['allowableUsage']
+            self.remaining_usage = self.allowed_usage - self.total_usage
+        except Exception as e:
+            _LOGGER.error(f"Failed to set custom attrs, err: {e}")
+
         return
