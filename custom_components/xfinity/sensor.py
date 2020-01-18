@@ -84,6 +84,7 @@ class XfinityUsageSensor(Entity):
         res[ATTR_TOTAL_USAGE] = self._xfinity_data.total_usage
         res[ATTR_ALLOWED_USAGE] = self._xfinity_data.allowed_usage
         res[ATTR_REMAINING_USAGE] = self._xfinity_data.remaining_usage
+        res[ATTR_POLICY_NAME] = str(self._xfinity_data.policy_name).capitalize()
         return res
 
     @property
@@ -110,6 +111,8 @@ class XfinityUsageData:
         self.total_usage = None
         self.allowed_usage = None
         self.remaining_usage = None
+        self.policy_name = None
+        self._policy = None
 
     def update(self):
         """Update usage values"""
@@ -155,10 +158,14 @@ class XfinityUsageData:
         _LOGGER.debug(f"Received usage data: {self.data}")
 
         try:
+            self._policy = self.data['usageMonths'][-1]['policy']
+            self.policy_name = str(self.data['usageMonths'][-1]['policyName']).capitalize()
             self.unit = self.data['usageMonths'][-1]['unitOfMeasure']
             self.total_usage = self.data['usageMonths'][-1]['homeUsage']
-            self.allowed_usage = self.data['usageMonths'][-1]['allowableUsage']
-            self.remaining_usage = self.allowed_usage - self.total_usage
+            if self._policy != 'unlimited':
+                self.allowed_usage = self.data['usageMonths'][-1]['allowableUsage']
+                self.remaining_usage = self.allowed_usage - self.total_usage
+
         except Exception as e:
             _LOGGER.error(f"Failed to set custom attrs, err: {e}")
 

@@ -1,6 +1,7 @@
 
 ATTRIBUTION = "Powered by Xfinity"
 
+ATTR_POLICY_NAME = 'policy_name'
 ATTR_TOTAL_USAGE = 'total_usage'
 ATTR_ALLOWED_USAGE = 'allowed_usage'
 ATTR_REMAINING_USAGE = 'remaining_usage'
